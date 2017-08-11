@@ -2,6 +2,4 @@
   (:require [clojure.test :refer :all]
             [auto-reloaded-repl.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+;;TODO - how do you test hot swap code?
