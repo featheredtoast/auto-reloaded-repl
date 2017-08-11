@@ -1,10 +1,12 @@
 # auto-reloaded-repl
 
-A Clojure library designed to ... well, that part is up to you.
+A simple component to call `(reloaded.repl/reset)` on file changes.
 
 ## Usage
 
-FIXME
+This component is to be used at development hand in hand with reloaded.repl.
+
+Include it in your system, and give it the paths to watch.
 
 ## License
 
