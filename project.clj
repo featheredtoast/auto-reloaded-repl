@@ -1,6 +1,6 @@
 (defproject auto-reloaded-repl "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A component to reload the system when files change"
+  :url "https://github.com/featheredtoast/auto-reloaded-repl"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
