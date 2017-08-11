@@ -4,7 +4,7 @@
             [hawk.core :as hawk]
             [clojure.tools.nrepl :as repl]))
 
-(defrecord ResetComponent [paths watcher nrepl-connection]
+(defrecord ReloadedReplReset [paths watcher nrepl-connection]
   component/Lifecycle
   (start [component]
     (let [nrepl-port (Integer/parseInt (slurp ".nrepl-port"))
@@ -36,5 +36,5 @@
           (assoc :nrepl-connection (:nrepl-connection old-component)))
       (do (when old-component (component/stop old-component))
           (component/start component)))))
-(defn auto-reset [paths]
-  (map->ResetComponent {:paths paths}))
+(defn reloaded-repl-reset-component [paths]
+  (map->ReloadedReplReset {:paths paths}))
