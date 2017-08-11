@@ -1,4 +1,4 @@
-(defproject auto-reloaded-repl "0.1.0"
+(defproject org.clojars.featheredtoast/auto-reloaded-repl "0.1.0"
   :description "A component to reload the system when files change"
   :url "https://github.com/featheredtoast/auto-reloaded-repl"
   :license {:name "Eclipse Public License"
