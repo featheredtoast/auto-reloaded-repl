@@ -21,6 +21,14 @@ Include it in your system, and give it the paths to watch.
 ;; ...
 ```
 
+When any files along the paths are changed, `(reloaded.repl/reset)` gets sent to the currently running repl.
+
+## TODO
+
+* Currently finds the repl to connect to by `.nrepl-port` in the project root. May be other connection schemes in the future.
+* Redo namespaces? Align under a better package structure.
+* Perhaps abstract the component so any command can be sent on change, not just `reloaded-repl.`
+
 ## License
 
 Copyright © 2017 Jeff Wong
