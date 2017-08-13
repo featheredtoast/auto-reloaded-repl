@@ -1,5 +1,7 @@
 # repl-watcher
 
+[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.featheredtoast/repl-watcher.svg)](https://clojars.org/org.clojars.featheredtoast/repl-watcher)
+
 Send a command to the REPL on file changes inside a component.
 
 ## Usage
