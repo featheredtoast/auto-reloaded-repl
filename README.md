@@ -1,23 +1,21 @@
-# auto-reloaded-repl
+# repl-watcher
 
-[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.featheredtoast/auto-reloaded-repl.svg)](https://clojars.org/org.clojars.featheredtoast/auto-reloaded-repl)
-
-A simple component to call `(reloaded.repl/reset)` on file changes.
+Send a command to the REPL on file changes inside a component.
 
 ## Usage
 
-This component is to be used at development hand in hand with reloaded.repl.
-
-Include it in your system, and give it the paths to watch.
+Include it in your system, and give it the paths to watch, and a command to run
 
 ```clojure
-(:require [auto-reloaded-repl.core :refer [reloaded-repl-reset-component])
+(:require [repl-watcher.core :refer [repl-watcher])
 ```
+
+This example watches source files, and runs `reloaded.repl/reset` when changes are detected.
 
 ```clojure
 (component/system-map
 ;; ...
-:auto-reset (reloaded-repl-reset-component ["src/clj" "src/cljs"])
+:auto-reset (repl-watcher ["src/clj" "src/cljs"] "(reloaded.repl/reset)")
 ;; ...
 ```
 
@@ -27,7 +25,9 @@ When any files along the paths are changed, `(reloaded.repl/reset)` gets sent to
 
 I wanted to watch for source changes directly in my component, without spinning up a separate repl.
 
-`tools.namespace.repl` provides ways of hot-reloading. However, doing so programmatically leads to very strange issues, if not reset from a running repl. They work differently, which is a bit of a surprise. The issue comes down to this error:
+When evaluating how to run a `(reloaded.repl/reset)` programmatically, I was running into issues with resets.
+
+The issues stem from `tools.namespace.repl`, which provide ways of hot-reloading. However, doing so programmatically leads to very strange issues, if not reset from a running repl. They work differently, which is a bit of a surprise. The issue comes down to this error:
 
 `IllegalStateException("Can't change/establish root binding of: *ns* with set")`
 
@@ -38,7 +38,6 @@ http://justabloginthepark.com/2017/06/18/clojure-and-the-esoteric-mysteries-of-n
 ## TODO
 
 * Currently finds the repl to connect to by `.nrepl-port` in the project root. May be other connection schemes in the future.
-* Redo namespaces? Align under a better package structure.
 
 ## License
 

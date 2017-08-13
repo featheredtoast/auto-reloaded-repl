@@ -1,4 +1,4 @@
-(ns auto-reloaded-repl.core
+(ns repl-watcher.core
   (:require [com.stuartsierra.component :as component]
             [suspendable.core :refer [Suspendable]]
             [hawk.core :as hawk]
@@ -10,7 +10,7 @@
     (map repl/read-response-value)
     repl/combine-responses))
 
-(defrecord ReloadedReplReset [paths watcher nrepl-connection]
+(defrecord ReplWatcherComponent [paths command watcher nrepl-connection]
   component/Lifecycle
   (start [component]
     (let [nrepl-port (Integer/parseInt (slurp ".nrepl-port"))
@@ -20,13 +20,11 @@
            [{:paths paths
              :filter hawk/file?
              :handler (fn [ctx e]
-                        (println "reloading system...")
                         (let [response (-> (repl/client nrepl-connection 1000)
-                                           (repl/message {:op "eval" :code "(reloaded.repl/reset)"})
+                                           (repl/message {:op "eval" :code command})
                                            get-out-or-values)]
                           (println (:out response))
-                          (println (first (:value response)))
-                          (println "reloaded")))}])]
+                          (println (first (:value response)))))}])]
       (-> (assoc component :watcher watch)
           (assoc :nrepl-connection nrepl-connection))))
   (stop [component]
@@ -44,5 +42,5 @@
           (assoc :nrepl-connection (:nrepl-connection old-component)))
       (do (when old-component (component/stop old-component))
           (component/start component)))))
-(defn reloaded-repl-reset-component [paths]
-  (map->ReloadedReplReset {:paths paths}))
+(defn repl-watcher [paths command]
+  (map->ReplWatcherComponent {:paths paths :command command}))

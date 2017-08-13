@@ -1,6 +1,6 @@
-(defproject org.clojars.featheredtoast/auto-reloaded-repl "0.1.0"
-  :description "A component to reload the system when files change"
-  :url "https://github.com/featheredtoast/auto-reloaded-repl"
+(defproject org.clojars.featheredtoast/repl-watcher "0.2.0"
+  :description "A component to run a repl command when files change"
+  :url "https://github.com/featheredtoast/repl-watcher"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
