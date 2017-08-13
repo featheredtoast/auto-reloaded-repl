@@ -25,6 +25,8 @@ When any files along the paths are changed, `(reloaded.repl/reset)` gets sent to
 
 ## Rationale
 
+I wanted to watch for source changes directly in my component, without spinning up a separate repl.
+
 `tools.namespace.repl` provides ways of hot-reloading. However, doing so programmatically leads to very strange issues, if not reset from a running repl. They work differently, which is a bit of a surprise. The issue comes down to this error:
 
 `IllegalStateException("Can't change/establish root binding of: *ns* with set")`
@@ -37,8 +39,6 @@ http://justabloginthepark.com/2017/06/18/clojure-and-the-esoteric-mysteries-of-n
 
 * Currently finds the repl to connect to by `.nrepl-port` in the project root. May be other connection schemes in the future.
 * Redo namespaces? Align under a better package structure.
-* Perhaps abstract the component so any command can be sent on change, not just `reloaded-repl.`
-* Return the client repl's printed output, rather than its result on success.
 
 ## License
 
