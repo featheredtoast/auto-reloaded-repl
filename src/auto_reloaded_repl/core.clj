@@ -4,6 +4,12 @@
             [hawk.core :as hawk]
             [clojure.tools.nrepl :as repl]))
 
+(defn get-out-or-values
+  [responses]
+  (->> responses
+    (map repl/read-response-value)
+    repl/combine-responses))
+
 (defrecord ReloadedReplReset [paths watcher nrepl-connection]
   component/Lifecycle
   (start [component]
@@ -15,10 +21,12 @@
              :filter hawk/file?
              :handler (fn [ctx e]
                         (println "reloading system...")
-                        (-> (repl/client nrepl-connection 1000)
-                            (repl/message {:op "eval" :code "(reloaded.repl/reset)"})
-                            repl/response-values)
-                        (println "reloaded!"))}])]
+                        (let [response (-> (repl/client nrepl-connection 1000)
+                                           (repl/message {:op "eval" :code "(reloaded.repl/reset)"})
+                                           get-out-or-values)]
+                          (println (:out response))
+                          (println (first (:value response)))
+                          (println "reloaded")))}])]
       (-> (assoc component :watcher watch)
           (assoc :nrepl-connection nrepl-connection))))
   (stop [component]
