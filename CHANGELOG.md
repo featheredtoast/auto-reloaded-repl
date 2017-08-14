@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file. This change
 
 ## [Unreleased]
 
+## [0.2.1] - 2017-08-13
+### Added
+- 2 second Debouncer to ensure that only a single command is run on change
+
 ## [0.2.0] - 2017-08-13
 ### Changed
 - Renamed project to repl-watcher
