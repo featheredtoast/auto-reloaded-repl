@@ -1,4 +1,4 @@
-(defproject org.clojars.featheredtoast/repl-watcher "0.2.1"
+(defproject featheredtoast/repl-watcher "0.2.1"
   :description "A component to run a repl command when files change"
   :url "https://github.com/featheredtoast/repl-watcher"
   :license {:name "Eclipse Public License"
