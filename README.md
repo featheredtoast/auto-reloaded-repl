@@ -41,6 +41,10 @@ http://justabloginthepark.com/2017/06/18/clojure-and-the-esoteric-mysteries-of-n
 
 * Currently finds the repl to connect to by `.nrepl-port` in the project root. May be other connection schemes in the future.
 
+## Implementation details
+
+Currently Hawk sometimes is a little loud when it comes to file watching, if a file is modified multiple times, eg in a VM. This library comes with a 2 second window where it ignores events, which is sufficient for my use cases.
+
 ## License
 
 Copyright © 2017 Jeff Wong
